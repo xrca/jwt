@@ -1,5 +1,6 @@
 package com.xrca.rest;
 
+import com.xrca.context.UserContext;
 import com.xrca.entity.User;
 import com.xrca.util.JWTUtil;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,5 +38,18 @@ public class UserController {
         resp.put("code", 200);
         resp.put("token", token);
         return resp;
+    }
+
+    /**
+     * @author xrca
+     * @description 更新用户信息
+     * @date 2020/12/6 16:10
+     **/
+    @PostMapping("updateInfo")
+    public String updateInfo(User user) {
+        System.out.println(UserContext.get("userId"));
+        System.out.println(UserContext.get("userName"));
+        System.out.println(UserContext.get("orgCode"));
+        return "操作成功";
     }
 }

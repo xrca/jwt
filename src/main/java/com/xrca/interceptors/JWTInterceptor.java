@@ -1,6 +1,7 @@
 package com.xrca.interceptors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xrca.context.UserContext;
 import com.xrca.util.JWTUtil;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -33,6 +34,9 @@ public class JWTInterceptor implements HandlerInterceptor {
             response.getWriter().println(json);
             return false;
         }
+        // 将用户信息放入上下文
+        Map<String, Object> userInfo = JWTUtil.getUserInfo(token);
+        UserContext.setMap(userInfo);
         return true;
     }
 }
